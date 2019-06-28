@@ -5,9 +5,6 @@ services:
     image: mongo:4.1
     volumes:
       - resource_db:/data/db
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=resource_service
-      - MONGO_INITDB_ROOT_PASSWORD=_CoalbaseResourceMS_2019
     networks:
       - service_internal
   springboot-service:
@@ -17,8 +14,6 @@ services:
       - RESOURCE_DB_HOST=mongo
       - RESOURCE_DB_PORT=27017
       - RESOURCE_DB_NAME=resource_db
-      - RESOURCE_DB_PW=_CoalbaseResourceMS_2019
-      - RESOURCE_DB_USER=resource_service
     depends_on:
       - mongo
     networks:

@@ -3,8 +3,6 @@ spring:
   data:
     mongodb:
       uri: mongodb://${RESOURCE_DB_HOST}:${RESOURCE_DB_PORT}/${RESOURCE_DB_NAME}
-      password: ${RESOURCE_DB_PW}
-      username: ${RESOURCE_DB_USER}
   # kafka servers
   kafka:
     bootstrap-servers: kafka-1:9092,kafka-2:9092,kafka-3:9092
