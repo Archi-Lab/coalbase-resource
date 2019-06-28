@@ -1,0 +1,22 @@
+server:
+  port: 8082
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/resourceDB
+  # Kafka
+  kafka:
+    bootstrap-servers: localhost:9090
+# Keycloak
+keycloak:
+  auth-server-url: http://localhost:8090/auth/
+# CORS
+security:
+  cors:
+    allowed-origins: '*'
+    allowed-headers: '*'
+    allowed-methods: '*'
+# Eureka
+eureka:
+  client:
+    enabled: false
