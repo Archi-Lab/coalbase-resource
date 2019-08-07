@@ -11,4 +11,6 @@ public interface WebLinkResourceRepository extends MongoRepository<WebLinkResour
 
   public List<WebLinkResource> findByReferenceId(UUID referenceId);
 
+  void deleteAllByReferenceId(UUID referenceId);
+
 }

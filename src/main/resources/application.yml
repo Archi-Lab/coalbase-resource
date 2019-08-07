@@ -17,6 +17,8 @@ spring:
       indent-output: true
     deserialization:
       accept-empty-array-as-null-object: true
+  kafka:
+    group-id: "resource"
 # Server
 server:
   port: 8080
@@ -29,4 +31,7 @@ keycloak:
   resource: coalbase-api
   bearer-only: true
   principal-attribute: preferred_username
+# Kafka-topic
+resource.topic: resource
+learning-space.topic: learning-space
 
