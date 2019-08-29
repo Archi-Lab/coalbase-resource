@@ -1,12 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <artifactId>resource</artifactId>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.1.6.RELEASE</version>
+  </parent>
+
+  <groupId>io.archilab.coalbase</groupId>
+  <artifactId>coalbase-resource</artifactId>
+  <version>${revision}${changelist}</version>
+
+  <name>coalbase-resource</name>
+  <description>Demo project for Spring Boot</description>
+
+  <properties>
+    <checkstyle.version>2.17</checkstyle.version>
+    <dockerfile-maven.version>1.4.10</dockerfile-maven.version>
+    <docker.image.prefix>docker.nexus.archi-lab.io/archilab</docker.image.prefix>
+    <java.version>1.8</java.version>
+    <jacoco.version>0.8.1</jacoco.version>
+    <keycloak.version>4.8.3.Final</keycloak.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <revision>0.1.0</revision>
+    <changelist>-SNAPSHOT</changelist>
+    <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+    <tidy-maven.version>1.1.0</tidy-maven.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.keycloak.bom</groupId>
+        <artifactId>keycloak-adapter-bom</artifactId>
+        <version>4.8.3.Final</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-mongodb</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-hateoas</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-rest-hal-browser</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.kafka</groupId>
+      <artifactId>spring-kafka</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.kafka</groupId>
+      <artifactId>spring-kafka-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <!--Keycloak+Security-->
+    <dependency>
+      <groupId>org.keycloak</groupId>
+      <artifactId>keycloak-spring-boot-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
   <build>
     <plugins>
       <plugin>
-        <artifactId>jacoco-maven-plugin</artifactId>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>tidy-maven-plugin</artifactId>
+        <version>${tidy-maven.version}</version>
         <executions>
+          <execution>
+            <id>tidy-pom</id>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>pom</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin><executions>
           <execution>
             <goals>
               <goal>prepare-agent</goal>
@@ -55,124 +170,90 @@
           </execution>
         </executions>
         <groupId>org.jacoco</groupId>
-        <version>0.8.1</version>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
       </plugin>
-      <plugin>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <configuration>
+      <plugin><configuration>
           <argLine>@{argLine}</argLine>
         </configuration>
         <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
       </plugin>
       <plugin>
-        <artifactId>spring-boot-maven-plugin</artifactId>
         <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
-      <plugin>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <configuration>
+      <plugin><configuration>
           <configLocation>google_checks.xml</configLocation>
         </configuration>
         <groupId>org.apache.maven.plugins</groupId>
-        <version>2.17</version>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${checkstyle.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>package</phase>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <artifactId>${project.artifactId}</artifactId>
+                  <groupId>${project.groupId}</groupId>
+                  <version>${project.version}</version>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <version>${dockerfile-maven.version}</version>
+        <configuration>
+          <contextDirectory>${project.basedir}</contextDirectory>
+          <repository>${docker.image.prefix}/${project.artifactId}</repository>
+        </configuration>
+        <executions>
+          <execution>
+            <id>docker-build</id>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>docker-tag</id>
+            <goals>
+              <goal>tag</goal>
+            </goals>
+            <configuration>
+              <tag>${project.version}</tag>
+            </configuration>
+          </execution>
+          <execution>
+            <id>docker-push</id>
+            <goals>
+              <goal>push</goal>
+            </goals>
+            <configuration>
+              <tag>${project.version}</tag>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
       </plugin>
     </plugins>
   </build>
-
-  <dependencies>
-    <dependency>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-      <groupId>org.springframework.boot</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>spring-boot-starter-data-mongodb</artifactId>
-      <groupId>org.springframework.boot</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>spring-boot-starter-hateoas</artifactId>
-      <groupId>org.springframework.boot</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-      <groupId>org.springframework.cloud</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>spring-data-rest-hal-browser</artifactId>
-      <groupId>org.springframework.data</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>spring-kafka</artifactId>
-      <groupId>org.springframework.kafka</groupId>
-    </dependency>
-
-    <dependency>
-      <artifactId>lombok</artifactId>
-      <groupId>org.projectlombok</groupId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <groupId>org.springframework.boot</groupId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <artifactId>spring-kafka-test</artifactId>
-      <groupId>org.springframework.kafka</groupId>
-      <scope>test</scope>
-    </dependency>
-
-    <!--Keycloak+Security-->
-    <dependency>
-      <artifactId>keycloak-spring-boot-starter</artifactId>
-      <groupId>org.keycloak</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>spring-boot-starter-security</artifactId>
-      <groupId>org.springframework.boot</groupId>
-    </dependency>
-    <dependency>
-      <artifactId>spring-security-test</artifactId>
-      <groupId>org.springframework.security</groupId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <artifactId>spring-cloud-dependencies</artifactId>
-        <groupId>org.springframework.cloud</groupId>
-        <scope>import</scope>
-        <type>pom</type>
-        <version>${spring-cloud.version}</version>
-      </dependency>
-      <dependency>
-        <artifactId>keycloak-adapter-bom</artifactId>
-        <groupId>org.keycloak.bom</groupId>
-        <scope>import</scope>
-        <type>pom</type>
-        <version>4.8.3.Final</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
-  <description>Demo project for Spring Boot</description>
-  <groupId>de.thkoeln.archilab</groupId>
-  <modelVersion>4.0.0</modelVersion>
-
-  <name>coalbase-resources</name>
-
-  <parent>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <groupId>org.springframework.boot</groupId>
-    <relativePath/>
-    <version>2.1.6.RELEASE</version> <!-- lookup parent from repository -->
-  </parent>
-
-  <properties>
-    <java.version>1.8</java.version>
-    <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
-  </properties>
-
-  <version>0.0.1-SNAPSHOT</version>
-
 </project>
