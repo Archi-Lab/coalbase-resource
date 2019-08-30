@@ -1,4 +1,4 @@
-package io.thkoeln.archilab.coalbaseresources.keycloak;
+package io.archilab.coalbase.resource.keycloak;
 
 import org.keycloak.adapters.KeycloakConfigResolver;
 import org.keycloak.adapters.springboot.KeycloakSpringBootConfigResolver;

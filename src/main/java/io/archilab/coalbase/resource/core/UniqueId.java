@@ -1,4 +1,4 @@
-package io.thkoeln.archilab.coalbaseresources.core;
+package io.archilab.coalbase.resource.core;
 
 import java.io.Serializable;
 import java.util.UUID;

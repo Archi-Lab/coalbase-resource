@@ -1,4 +1,4 @@
-package io.thkoeln.archilab.coalbaseresources.resources;
+package io.archilab.coalbase.resource.resources;
 
 import java.util.UUID;
 import lombok.Getter;

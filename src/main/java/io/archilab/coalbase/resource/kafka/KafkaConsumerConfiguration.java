@@ -1,4 +1,4 @@
-package io.thkoeln.archilab.coalbaseresources.kafka;
+package io.archilab.coalbase.resource.kafka;
 
 import java.util.HashMap;
 import java.util.Map;

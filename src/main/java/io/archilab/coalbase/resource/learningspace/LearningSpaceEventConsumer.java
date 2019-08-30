@@ -1,7 +1,7 @@
-package io.thkoeln.archilab.coalbaseresources.learningspace;
+package io.archilab.coalbase.resource.learningspace;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.thkoeln.archilab.coalbaseresources.resources.WebLinkResourceRepository;
+import io.archilab.coalbase.resource.resources.WebLinkResourceRepository;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;

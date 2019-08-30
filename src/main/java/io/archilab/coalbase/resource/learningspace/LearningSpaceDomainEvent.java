@@ -1,8 +1,8 @@
-package io.thkoeln.archilab.coalbaseresources.learningspace;
+package io.archilab.coalbase.resource.learningspace;
 
 
-import io.thkoeln.archilab.coalbaseresources.core.DomainEvent;
-import io.thkoeln.archilab.coalbaseresources.core.UniqueId;
+import io.archilab.coalbase.resource.core.DomainEvent;
+import io.archilab.coalbase.resource.core.UniqueId;
 
 public class LearningSpaceDomainEvent extends DomainEvent {
 
