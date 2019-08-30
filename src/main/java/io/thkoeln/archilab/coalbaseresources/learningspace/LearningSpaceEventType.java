@@ -1,4 +1,4 @@
-package de.thkoeln.archilab.coalbaseresources.learningspace;
+package io.thkoeln.archilab.coalbaseresources.learningspace;
 
 public enum LearningSpaceEventType {
   CREATED, UPDATED, DELETED

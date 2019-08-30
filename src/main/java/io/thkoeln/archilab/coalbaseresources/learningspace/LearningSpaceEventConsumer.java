@@ -1,14 +1,11 @@
-package de.thkoeln.archilab.coalbaseresources.learningspace;
+package io.thkoeln.archilab.coalbaseresources.learningspace;
 
-import de.thkoeln.archilab.coalbaseresources.resources.WebLinkResourceRepository;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.thkoeln.archilab.coalbaseresources.resources.WebLinkResourceRepository;
+import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class LearningSpaceEventConsumer {
@@ -30,7 +27,7 @@ public class LearningSpaceEventConsumer {
         .readValue(message, LearningSpaceDomainEvent.class);
 
     if (learningSpaceDomainEvent.getEventType().equals(LearningSpaceEventType.DELETED.name())) {
-      webLinkResourceRepository.deleteAllByReferenceId(
+      this.webLinkResourceRepository.deleteAllByReferenceId(
           learningSpaceDomainEvent.getLearningSpaceIdentifier().getUuid());
     }
   }

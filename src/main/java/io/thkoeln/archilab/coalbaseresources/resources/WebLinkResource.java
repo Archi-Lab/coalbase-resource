@@ -1,12 +1,10 @@
-package de.thkoeln.archilab.coalbaseresources.resources;
-
-import org.springframework.data.annotation.Id;
+package io.thkoeln.archilab.coalbaseresources.resources;
 
 import java.util.UUID;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.annotation.Id;
 
 
 @Setter

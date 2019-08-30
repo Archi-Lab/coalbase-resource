@@ -1,8 +1,8 @@
-package de.thkoeln.archilab.coalbaseresources.learningspace;
+package io.thkoeln.archilab.coalbaseresources.learningspace;
 
 
-import de.thkoeln.archilab.coalbaseresources.core.DomainEvent;
-import de.thkoeln.archilab.coalbaseresources.core.UniqueId;
+import io.thkoeln.archilab.coalbaseresources.core.DomainEvent;
+import io.thkoeln.archilab.coalbaseresources.core.UniqueId;
 
 public class LearningSpaceDomainEvent extends DomainEvent {
 
@@ -26,6 +26,6 @@ public class LearningSpaceDomainEvent extends DomainEvent {
   }
 
   public UniqueId getLearningSpaceIdentifier() {
-    return learningSpaceIdentifier;
+    return this.learningSpaceIdentifier;
   }
 }

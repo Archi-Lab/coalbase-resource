@@ -1,4 +1,4 @@
-package de.thkoeln.archilab.coalbaseresources;
+package io.thkoeln.archilab.coalbaseresources;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

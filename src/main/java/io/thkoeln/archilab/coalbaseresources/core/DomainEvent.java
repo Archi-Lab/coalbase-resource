@@ -1,4 +1,4 @@
-package de.thkoeln.archilab.coalbaseresources.core;
+package io.thkoeln.archilab.coalbaseresources.core;
 
 import java.util.UUID;
 
